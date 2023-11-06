@@ -12,11 +12,16 @@ type LakshyaEvents = Promise<LakshyaEvent[]>;
  * @returns A Promise that resolves to an array of LakshyaEvent objects.
  * @throws Error if there is an issue with the database query.
  */
-export default async function getMyEvents(userId: string,supabase :SupabaseClient): Promise<LakshyaEvents> {
+export default async function getMyEvents(
+  userId: string,
+  supabase: SupabaseClient,
+): Promise<LakshyaEvents> {
   try {
     const { data, error } = await supabase
       .from(EventUsersTable.tableName)
-      .select(`*,event:event_id(*,coordinator:coordinator_id(*),co_coordinator:co_coordinator_id(*),rsvp_handler:rsvp_handler_id(*))`)
+      .select(
+        `*,event:event_id(*,coordinator:coordinator_id(*),co_coordinator:co_coordinator_id(*),rsvp_handler:rsvp_handler_id(*))`,
+      )
       .eq(EventUsersTable.userId, userId);
 
     if (error) {
@@ -28,8 +33,10 @@ export default async function getMyEvents(userId: string,supabase :SupabaseClien
       return [];
     }
 
-    return data.map<LakshyaEvent>((element) => LakshyaEvent.fromJSON(element.event));
+    return data.map<LakshyaEvent>((element) =>
+      LakshyaEvent.fromJSON(element.event),
+    );
   } catch (error) {
-   throw (errorHandler(error))
+    throw errorHandler(error);
   }
 }

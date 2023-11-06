@@ -1,16 +1,23 @@
 {
   "name": "lakshya-sdk",
-  "version": "1.0.2",
-  "description": "",
+  "version": "1.0.3",
+  "description": "A full fledged module for laksha-event-management",
   "main": "dist/index.js",
+  "repository": {
+    "url": "https://github.com/Yogesh-Dubey-Ayesavi/lakshya-sdk"
+  },
+  "maintainers": [
+    "https://github.com/Yogesh-Dubey-Ayesavi"
+  ],
   "types": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
   ],
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc index.ts",
+    "format": "npx prettier --write \"{src,test}/**/*.ts\"",
+    "build:docs":" npx typedoc --plugin typedoc-plugin-missing-exports  ./index.ts --exclude ./node_modules/**"
   },
   "author": "",
   "license": "ISC",

@@ -137,7 +137,9 @@ class LakshyaEvent {
       rsvp_handler: json.rsvp_handler ? User.fromJSON(json.rsvp_handler) : null,
       support: json.support,
       coordinator: json.coordinator ? User.fromJSON(json.coordinator) : null,
-      co_cordinator: json.co_cordinator ? User.fromJSON(json.co_cordinator) : null,
+      co_cordinator: json.co_cordinator
+        ? User.fromJSON(json.co_cordinator)
+        : null,
     });
   }
 
@@ -218,6 +220,5 @@ export interface LakshyaEventInterface {
    */
   rsvp_handler: User | null;
 }
-
 
 export default LakshyaEvent;

@@ -8,9 +8,13 @@ import { errorHandler } from "../../../error_handler/error_handler";
  * @returns A Promise that resolves to an array of LakshyaEvent objects.
  * @throws Error if there is an issue with the database query.
  */
-export default async function getEvents(supabase :SupabaseClient): Promise<LakshyaEvent[]> {
+export default async function getEvents(
+  supabase: SupabaseClient,
+): Promise<LakshyaEvent[]> {
   try {
-    const { data, error } = await supabase.from("events").select(`*,coordinator:coordinator_id(*)`);
+    const { data, error } = await supabase
+      .from("events")
+      .select(`*,coordinator:coordinator_id(*)`);
 
     if (error) {
       throw error;
@@ -22,10 +26,12 @@ export default async function getEvents(supabase :SupabaseClient): Promise<Laksh
     }
 
     // Map the retrieved data to LakshyaEvent objects
-    const events = data.map<LakshyaEvent>((element) => LakshyaEvent.fromJSON(element));
+    const events = data.map<LakshyaEvent>((element) =>
+      LakshyaEvent.fromJSON(element),
+    );
 
     return events;
   } catch (error) {
-   throw errorHandler(error);
+    throw errorHandler(error);
   }
 }

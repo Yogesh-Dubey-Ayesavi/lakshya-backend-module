@@ -81,7 +81,6 @@ class EventTicket {
   }
 }
 
-
 /**
  * Interface representing the expected properties of an EventTicket.
  */
@@ -116,6 +115,5 @@ export interface EventTicketInterface {
    */
   expired_at: Date | null;
 }
-
 
 export default EventTicket;
