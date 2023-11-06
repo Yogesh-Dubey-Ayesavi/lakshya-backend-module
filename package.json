@@ -15,7 +15,7 @@
     "src"
   ],
   "scripts": {
-    "build": "tsc index.ts",
+    "build": "tsc",
     "format": "npx prettier --write \"{src,test}/**/*.ts\"",
     "build:docs":" npx typedoc --plugin typedoc-plugin-missing-exports  ./index.ts --exclude ./node_modules/**"
   },
