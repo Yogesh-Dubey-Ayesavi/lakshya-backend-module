@@ -29,7 +29,7 @@ To install LakshyaSDK, you can use npm or yarn:
 
 ```bash
 npm install @supabase/supabase-js
-npm install @supabase/supabase-js
+npm i lakshya-sdk
 ```
 
 or
