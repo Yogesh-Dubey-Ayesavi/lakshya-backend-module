@@ -44,13 +44,45 @@ class User {
   }
 }
 
-interface UserInterface {
+/**
+ * UserInterface
+ *
+ * Defines the structure of user data in the [User].
+ */
+export interface UserInterface {
+  /**
+   * A unique identifier for the user.
+   */
   id: string;
+
+  /**
+   * The date and time when the user was created, represented as a string.
+   */
   created_at: string;
+
+  /**
+   * The user's phone number, which can be either a valid string or `null` if not provided.
+   */
   phone_number: string | null;
+
+  /**
+   * The user's email address, which can be either a valid string or `null` if not provided.
+   */
   email_id: string | null;
+
+  /**
+   * The user's semester or academic level, represented as a number or `null` if not applicable.
+   */
   sem: number | null;
+
+  /**
+   * The URL to the user's avatar image, which can be either a valid string or `null` if not provided.
+   */
   avatar_url: string | null;
+
+  /**
+   * The user's name, which can be either a valid string or `null` if not provided.
+   */
   name: string | null;
 }
 

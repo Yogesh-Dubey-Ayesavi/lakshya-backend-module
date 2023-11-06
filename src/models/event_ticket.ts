@@ -81,16 +81,41 @@ class EventTicket {
   }
 }
 
+
 /**
  * Interface representing the expected properties of an EventTicket.
  */
-interface EventTicketInterface {
+export interface EventTicketInterface {
+  /**
+   * The user ID associated with the ticket.
+   */
   user_id: string;
+
+  /**
+   * The timestamp when the ticket was created.
+   */
   created_at: Date;
+
+  /**
+   * The unique identifier of the ticket.
+   */
   ticket_id: string;
+
+  /**
+   * Indicates whether the ticket has expired.
+   */
   expired: boolean;
+
+  /**
+   * The event associated with the ticket.
+   */
   event: LakshyaEvent;
+
+  /**
+   * The timestamp when the ticket expired, if applicable (nullable).
+   */
   expired_at: Date | null;
 }
+
 
 export default EventTicket;

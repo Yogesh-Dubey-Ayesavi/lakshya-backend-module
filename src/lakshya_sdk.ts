@@ -113,6 +113,7 @@ class LakshyaSDK {
 
   /**
    * Retrieves a list of Event Tickets from the database.
+   * One can fetch tickets that only belong to him
    * @returns A Promise that resolves to an array of EventTicket instances if successful, or rejects with an error.
    * @throws An error if there is an issue with the database operation or if the supplied errorHandler is triggered.
    */

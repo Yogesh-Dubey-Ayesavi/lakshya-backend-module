@@ -164,17 +164,58 @@ class LakshyaEvent {
 
 /**
  * Interface representing the expected properties of a LakshyaEvent.
+ *//**
+ * Interface representing the expected properties of a LakshyaEvent.
  */
-interface LakshyaEventInterface {
+export interface LakshyaEventInterface {
+  /**
+   * A unique identifier for the event.
+   */
   id: string;
+
+  /**
+   * The date and time when the event was created, represented as a string.
+   */
   created_at: string;
+
+  /**
+   * The name of the event, which can be either a valid string or `null` if not provided.
+   */
   name: string | null;
+
+  /**
+   * A description of the event, which can be either a valid string or `null` if not provided.
+   */
   description: string | null;
+
+  /**
+   * The date and time of the event, represented as a string or `null` if not specified.
+   */
   datetime: string | null;
+
+  /**
+   * The URL to a picture associated with the event, which can be either a valid string or `null` if not provided.
+   */
   picture: string | null;
+
+  /**
+   * The coordinator of the event, which can be either a valid User object or `null` if not specified.
+   */
   coordinator: User | null;
+
+  /**
+   * The co-coordinator of the event, which can be either a valid User object or `null` if not specified.
+   */
   co_cordinator: User | null;
+
+  /**
+   * Additional support information for the event, represented as an object or `null` if not provided.
+   */
   support: object | null;
+
+  /**
+   * The RSVP handler for the event, which can be either a valid User object or `null` if not specified.
+   */
   rsvp_handler: User | null;
 }
 
