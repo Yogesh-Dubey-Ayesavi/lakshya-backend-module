@@ -2,6 +2,10 @@ import User from "./user";
 
 /**
  * Represents a LakshyaEvent, which is an event with various properties.
+
+*/
+/**
+ * Represents a LakshyaEvent, which is an event with various properties.
   
 ```typescript
 const randomLakshyaEvent = {
@@ -10,6 +14,7 @@ const randomLakshyaEvent = {
     name: 'Random Event',
     description: 'This is a random LakshyaEvent description.',
     datetime: new Date().toISOString(),
+    amount:50,
     picture: 'https://example.com/random-image.jpg',
     coordinator:new User(
       {
@@ -103,6 +108,12 @@ class LakshyaEvent {
   rsvp_handler: User | null;
 
   /**
+   * The amount associated with the event (nullable).
+   * Represents the monetary value related to the event.
+   */
+  amount: number | null;
+
+  /**
    * Constructs a new LakshyaEvent instance.
    *
    * @param props - An object containing the properties of the LakshyaEvent.
@@ -118,6 +129,7 @@ class LakshyaEvent {
     this.support = props.support;
     this.coordinator = props.coordinator;
     this.co_cordinator = props.co_cordinator;
+    this.amount = props.amount;
   }
 
   /**
@@ -140,6 +152,7 @@ class LakshyaEvent {
       co_cordinator: json.co_cordinator
         ? User.fromJSON(json.co_cordinator)
         : null,
+      amount: json.amount,
     });
   }
 
@@ -160,14 +173,13 @@ class LakshyaEvent {
       support: this.support,
       coordinator: this.coordinator ? this.coordinator.toJSON() : null,
       co_cordinator: this.co_cordinator ? this.co_cordinator.toJSON() : null,
+      amount: this.amount,
     };
   }
 }
 
 /**
- * Interface representing the expected properties of a LakshyaEvent.
- *//**
- * Interface representing the expected properties of a LakshyaEvent.
+  Interface representing the expected properties of a LakshyaEvent.
  */
 export interface LakshyaEventInterface {
   /**
@@ -219,6 +231,11 @@ export interface LakshyaEventInterface {
    * The RSVP handler for the event, which can be either a valid User object or `null` if not specified.
    */
   rsvp_handler: User | null;
+
+  /**
+   * The amount associated with the event, representing the monetary value. It can be either a valid number or `null` if not specified.
+   */
+  amount: number | null;
 }
 
 export default LakshyaEvent;
