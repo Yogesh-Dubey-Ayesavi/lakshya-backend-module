@@ -8,52 +8,63 @@ import getMyEvents from "./methods/events/get_my_events";
 import getTickets from "./methods/events/get_tickets";
 import EventTicket from "./models/event_ticket";
 import registerInEvent from "./methods/events/register_in_event";
+import requestPayment from "./methods/payment/request_payment";
+import RequestPaymentResponse from "./models/request_payment_response";
 
 /**
- ####  LakshyaSDK is a class that provides methods for interacting with the Lakshya SDK.
- ```typescript
-
- import { createClient } from "@supabase/supabase-js"; // Import the Supabase client library
-import LakshyaSDK from "lakshya-sdk"; // Replace with the actual path to your LakshyaSDK module
-
-// Initialize a Supabase client
-const supabase = createClient("your-supabase-url", "your-supabase-api-key");
-
-// Initialize the LakshyaSDK using the Supabase client
-const lakshya = LakshyaSDK.initialize(supabase);
-
-// Now you can use the LakshyaSDK methods
-
-  const userId = "123"; // Replace with the user's ID
-
-  // Retrieve user information
-  const user = await lakshya.getUserInfo(userId);
-  console.log("User Information:", user);
-
-  // Update user information
-  const updatedUser = await lakshya.updateUser(updatedUser);
-  console.log("User updated successfully");
-
-  // Fetch a list of events
-  const events = await lakshya.getEvents();
-  console.log("List of Events:", events);
-
-  // Get events associated with a specific user
-  const myEvents = await lakshya.getMyEvents(userId);
-  console.log("User's Events:", myEvents);
-
-  // Retrieve event tickets
-  const tickets = await lakshya.getTickets();
-  console.log("Event Tickets:", tickets);
-
-  // Register the user for multiple events
-  const eventsToRegister =  [] // List of [LaksyaEvent] to register ;
-  const registrationSuccess = await lakshya.registerEvent(eventsToRegister);
-  if (registrationSuccess) {
-    console.log("User registered for events successfully");
-  }
-})();
-```
+ * LakshyaSDK is a class that provides methods for interacting with the Lakshya SDK.
+ * ```typescript
+ * import { createClient } from "@supabase/supabase-js"; // Import the Supabase client library
+ * import LakshyaSDK from "lakshya-sdk"; // Replace with the actual path to your LakshyaSDK module
+ *
+ * // Initialize a Supabase client
+ * const supabase = createClient("your-supabase-url", "your-supabase-api-key");
+ *
+ * // Initialize the LakshyaSDK using the Supabase client
+ * const lakshya = LakshyaSDK.initialize(supabase);
+ *
+ * // Now you can use the LakshyaSDK methods
+ *
+ * const userId = "123"; // Replace with the user's ID
+ *
+ * // Retrieve user information
+ * const user = await lakshya.getUserInfo(userId);
+ * console.log("User Information:", user);
+ *
+ * // Update user information
+ * const updatedUser = await lakshya.updateUser(updatedUser);
+ * console.log("User updated successfully");
+ *
+ * // Fetch a list of events
+ * const events = await lakshya.getEvents();
+ * console.log("List of Events:", events);
+ *
+ * // Get events associated with a specific user
+ * const myEvents = await lakshya.getMyEvents(userId);
+ * console.log("User's Events:", myEvents);
+ *
+ * // Retrieve event tickets
+ * const tickets = await lakshya.getTickets();
+ * console.log("Event Tickets:", tickets);
+ *
+ * // Register the user for multiple events
+ * const eventsToRegister =  [] // List of [LaksyaEvent] to register ;
+ * const registrationSuccess = await lakshya.registerEvent(eventsToRegister);
+ * if (registrationSuccess) {
+ *   console.log("User registered for events successfully");
+ * }
+ *
+ * // Request payment for events
+ * const paymentEvents = [...]; // List of [LakshyaEvent] for payment
+ * const paymentHeaders = {...}; // HTTP headers for payment request
+ * const paymentEndpoint = 'https://example.com/payment'; // Payment endpoint
+ * try {
+ *   const paymentResponse = await lakshya.requestPayment(paymentEvents, paymentHeaders, paymentEndpoint);
+ *   console.log("Payment Response:", paymentResponse);
+ * } catch (error) {
+ *   console.error("Payment Error:", error.message);
+ * }
+ * ```
  */
 class LakshyaSDK {
   private static instance: LakshyaSDK;
@@ -129,6 +140,21 @@ class LakshyaSDK {
    */
   async registerEvent(events: LakshyaEvent[]): Promise<boolean> {
     return await registerInEvent(events, LakshyaSDK.supabase);
+  }
+
+  /**
+   * Sends a payment request to a specified endpoint for a list of events.
+   * @param events - An array containing event objects for which payment is requested.
+   * @param headers - HTTP headers to be included in the request.
+   * @param endpoint - The endpoint URL to which the payment request will be sent.
+   * @returns A Promise that resolves to a RequestPaymentResponse object representing the response from the payment request.
+   */
+  async requestPayment(
+    events: LakshyaEvent[],
+    headers: any,
+    endpoint: string
+  ): Promise<RequestPaymentResponse> {
+    return await requestPayment(events, headers, endpoint);
   }
 }
 

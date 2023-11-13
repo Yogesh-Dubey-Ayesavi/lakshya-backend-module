@@ -1,6 +1,6 @@
-
- 
 # LakshyaSDK Documentation
+
+
 
 LakshyaSDK is a TypeScript class that provides methods for interacting with the Lakshya SDK, enabling you to manage user information, events, event tickets, and event registrations. It is designed to work with a Supabase database instance and is intended for use in JavaScript or TypeScript applications.
 
@@ -17,6 +17,7 @@ LakshyaSDK is a TypeScript class that provides methods for interacting with the 
     - [getMyEvents](#getmyevents)
     - [getTickets](#gettickets)
     - [registerEvent](#registerevent)
+    - [request\_payment](#requestPayment)
 
 ## Installation
 
@@ -31,10 +32,6 @@ To install LakshyaSDK, you can use npm or yarn:
 npm install @supabase/supabase-js
 npm i lakshya-sdk
 ```
-
-or
-
-
 
 ## Initialization
 
@@ -167,7 +164,7 @@ console.log("User's Events:", myEvents);
 
 ```typescript
 async getTickets(): Promise<EventTicket[]>
-```****
+```
 
 - Retrieves a list of event tickets from the database.
 
@@ -219,8 +216,51 @@ if (registrationSuccess) {
 }
 ```
 
+### requestPayment
+
+**Method Signature:**
+
+```typescript
+async requestPayment(
+  events: LakshyaEvent[],
+  headers: any,
+  endpoint: string
+): Promise<RequestPaymentResponse>
+```
+
+- Sends a payment request to a specified endpoint for a list of events.
+
+**Parameters:**
+
+- `events` (LakshyaEvent[]): An array containing event objects for which payment is requested.
+- `headers` (any): HTTP headers to be included in the request.
+- `endpoint` (string): The endpoint URL to which the payment request will be sent.
+
+**Returns:**
+
+- A Promise that resolves to a `RequestPaymentResponse` object representing the response from the payment request.
+
+**Throws:**
+
+- An error if there is an issue with the payment request or if the supplied error handler is triggered.
+
+**Example:**
+
+```typescript
+const paymentEvents = [...]; // List of LakshyaEvent instances for payment
+const paymentHeaders = {...}; // HTTP headers for payment request
+const paymentEndpoint = 'https://example.com/payment'; // Payment endpoint
+
+try {
+  const paymentResponse = await lakshya.requestPayment(paymentEvents, paymentHeaders, paymentEndpoint);
+  console.log("Payment Response:", paymentResponse);
+} catch (error) {
+  console.error("Payment Error:", error.message);
+}
+```
+
 ---
 
-That's the complete documentation for the LakshyaSDK class. You can use these methods to interact with your Supabase database and manage user information, events, event tickets, and event registrations within your Lakshya-based application.
+That's the complete documentation for the LakshyaSDK class. You can use these methods to interact with your Supabase database
 
-
+ and manage user information, events, event tickets, event registrations, and make payment requests within your Lakshya-based application.
