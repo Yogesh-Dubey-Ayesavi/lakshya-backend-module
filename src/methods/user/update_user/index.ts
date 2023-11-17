@@ -4,6 +4,7 @@ import { errorHandler } from "../../../error_handler/error_handler";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 /**
+ * @deprecated
  * Update user information in the database.
  * @param {User} updatedUser - An instance of the User class with updated user data.
  * @returns {Promise<void>} - A Promise indicating the success or failure of the update operation.

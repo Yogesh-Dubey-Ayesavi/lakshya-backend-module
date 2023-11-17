@@ -10,6 +10,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
  * @returns A Promise that resolves to an array of EventTicket instances if successful, or rejects with an error.
  * @throws An error if there is an issue with the database operation or if the supplied errorHandler is triggered.
  */
+
 export default async function getTickets(
   supabase: SupabaseClient,
 ): Promise<EventTicket[]> {

@@ -162,12 +162,11 @@ class LakshyaSDK {
       
   /**
    * Fetches a list of unregistered events using a Supabase stored procedure.
-   * @param {SupabaseClient} supabase - The Supabase client instance used for making API requests.
    * @returns {Promise<LakshyaEvent[]>} A promise that resolves to an array of LakshyaEvent instances representing unregistered events.
    * @throws {Error} If there is an error fetching the unregistered events.
    */
-  async  getUnregisteredEvents(supabase: SupabaseClient): Promise<LakshyaEvent[]> {
-    return await getUnregisteredEvents(supabase);
+  async  getUnregisteredEvents(): Promise<LakshyaEvent[]> {
+    return await getUnregisteredEvents(LakshyaSDK.supabase);
   }
 
 
