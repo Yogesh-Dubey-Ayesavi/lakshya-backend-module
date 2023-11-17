@@ -2,7 +2,7 @@
  * Represents the response object for a payment request.
  * @class RequestPaymentResponse
  */
-class RequestPaymentResponse {
+export default class RequestPaymentResponse {
   /**
    * Array of payment links associated with the payment request.
    * @type {string[]|[]}
@@ -28,6 +28,18 @@ class RequestPaymentResponse {
   amount: number;
 
   /**
+   * List of events the user is already registered for.
+   * @type {string[]}
+   */
+  already_registered_in: string[] = [];
+
+  /**
+   * List of event IDs for which the QR has been provided, and the user is registering for.
+   * @type {string[]}
+   */
+  registering_for: string[] = [];
+
+  /**
    * Creates an instance of RequestPaymentResponse.
    * @constructor
    * @param {RequestPaymentResponseInterface} rpri - Object containing payment response information.
@@ -38,6 +50,8 @@ class RequestPaymentResponse {
     this.qr_codes = rpri.qr_codes;
     this.request_id = rpri.request_id;
     this.amount = rpri.amount;
+    this.already_registered_in = rpri.already_registered_in || [];
+    this.registering_for = rpri.registering_for || [];
   }
 }
 
@@ -69,6 +83,16 @@ export interface RequestPaymentResponseInterface {
    * @type {number}
    */
   amount: number;
-}
 
-export default RequestPaymentResponse;
+  /**
+   * List of events the user is already registered for.
+   * @type {string[]}
+   */
+  already_registered_in?: string[];
+
+  /**
+   * List of event IDs for which the QR has been provided, and the user is registering for.
+   * @type {string[]}
+   */
+  registering_for?: string[];
+}

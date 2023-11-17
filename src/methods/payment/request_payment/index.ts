@@ -36,6 +36,8 @@ async function requestPayment(
         qr_codes: qrCodes,
         request_id: response.data?.request_id ?? "",
         amount:response.data?.amount,
+        already_registered_in : response.data?.already_registered_in,
+        registering_for :response.data?.registering_for,
       });
     } else {
       // If the response status is not 200, an error is thrown with the response data.
