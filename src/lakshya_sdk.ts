@@ -10,6 +10,7 @@ import EventTicket from "./models/event_ticket";
 import registerInEvent from "./methods/events/register_in_event";
 import requestPayment from "./methods/payment/request_payment";
 import RequestPaymentResponse from "./models/request_payment_response";
+import getUnregisteredEvents from "./methods/events/get_unregistered_event";
 
 /**
  * LakshyaSDK is a class that provides methods for interacting with the Lakshya SDK.
@@ -142,6 +143,7 @@ class LakshyaSDK {
     return await registerInEvent(events, LakshyaSDK.supabase);
   }
 
+
   /**
    * Sends a payment request to a specified endpoint for a list of events.
    * @param events - An array containing event objects for which payment is requested.
@@ -156,6 +158,19 @@ class LakshyaSDK {
   ): Promise<RequestPaymentResponse> {
     return await requestPayment(events, headers, endpoint);
   }
+
+      
+  /**
+   * Fetches a list of unregistered events using a Supabase stored procedure.
+   * @param {SupabaseClient} supabase - The Supabase client instance used for making API requests.
+   * @returns {Promise<LakshyaEvent[]>} A promise that resolves to an array of LakshyaEvent instances representing unregistered events.
+   * @throws {Error} If there is an error fetching the unregistered events.
+   */
+  async  getUnregisteredEvents(supabase: SupabaseClient): Promise<LakshyaEvent[]> {
+    return await getUnregisteredEvents(supabase);
+  }
+
+
 }
 
 export default LakshyaSDK;
