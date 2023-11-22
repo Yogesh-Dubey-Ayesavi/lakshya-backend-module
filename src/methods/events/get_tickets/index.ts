@@ -28,7 +28,7 @@ export default async function getTickets(
     }
 
     // If successful, map the retrieved data to EventTicket instances and return them as an array.
-    return data?.map((ticket) => EventTicket.fromJSON(ticket.event)) ?? [];
+    return data?.map((ticket) => EventTicket.fromJSON(ticket)) ?? [];
   } catch (error) {
     // Handle any errors that occur during the database operation or error handling.
     throw errorHandler(error);
